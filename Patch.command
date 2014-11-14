@@ -11,24 +11,24 @@
 
 VERSION=0.0.1   # Version of the script.
 
-mute_on_path=/Library/Scripts/mute-on.sh
+mute_path=/Library/Scripts/mute-on.sh
 mute_on_text="#"'!'"/bin/bash\nosascript -e 'set volume with output muted'"
 
-mute_off_path=/Library/Scripts/mute-off.sh
+unmute_path=/Library/Scripts/mute-off.sh
 mute_off_text="#"'!'"/bin/bash\nosascript -e 'set volume without output muted'"
 
 function patch() {
-    echo -e $mute_on_text > $mute_on_path
-    chmod u+x $mute_on_path
-    echo " + Generated mute script to" $mute_on_path
+    echo -e $mute_on_text > $mute_path
+    chmod u+x $mute_path
+    echo " + Generated mute script to" $mute_path
 
-    echo -e $mute_off_text > $mute_off_path
-    chmod u+x $mute_off_path
-    echo " + Generated unmute script to" $mute_off_path
+    echo -e $mute_off_text > $unmute_path
+    chmod u+x $unmute_path
+    echo " + Generated unmute script to" $unmute_path
 
-    defaults write com.apple.loginwindow LogoutHook $mute_on_path
+    defaults write com.apple.loginwindow LogoutHook $mute_path
     echo " + Binding mute script to logout"
-    defaults write com.apple.loginwindow LoginHook $mute_off_path
+    defaults write com.apple.loginwindow LoginHook $unmute_path
     echo " + Binding unmute script to login"
     echo " + Finished patching."
     echo
@@ -37,10 +37,10 @@ function patch() {
 }
 
 function unpatch() {
-    rm -f $mute_on_path
-    echo " + Removing" $mute_on_path
-    rm -f $mute_off_path
-    echo " + Removing" $mute_off_path
+    rm -f $mute_path
+    echo " + Removing" $mute_path
+    rm -f $unmute_path
+    echo " + Removing" $unmute_path
     defaults delete com.apple.loginwindow LogoutHook
     echo " + Unbinding mute script"
     defaults delete com.apple.loginwindow LoginHook
@@ -91,7 +91,7 @@ fi
 # Check if the program has already been in patched, in which case, present the
 # option to restore the original file.
 confirm=1
-if [ -f "$mute_on_path" ] && [ -f "$mute_off_path" ]; then
+if [ -f "$mute_path" ] && [ -f "$unmute_path" ]; then
     echo " Your system appears to have already been patched. "
     echo -n " Would you like to undo the patch? (y/N) "
     read revert
