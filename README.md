@@ -21,6 +21,6 @@ Author: little-vince
 Change Log
 ----------
     2014-11-14
-     * Packaged and released the first version.
+     * Initial release
 
 

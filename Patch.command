@@ -7,7 +7,7 @@
 #
 # Revision history:
 #  2014-11-14:
-#   * Created
+#   * Initial release
 
 VERSION=0.0.1   # Version of the script.
 
