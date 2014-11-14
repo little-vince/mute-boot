@@ -11,20 +11,20 @@
 
 VERSION=0.0.1   # Version of the script.
 
-mute_path=/Library/Scripts/mute-on.sh
-mute_on_text="#"'!'"/bin/bash\nosascript -e 'set volume with output muted'"
+mute_path=/Library/Scripts/mute.sh
+mute_text="#"'!'"/bin/bash\nosascript -e 'set volume with output muted'"
 
-unmute_path=/Library/Scripts/mute-off.sh
-mute_off_text="#"'!'"/bin/bash\nosascript -e 'set volume without output muted'"
+unmute_path=/Library/Scripts/unmute.sh
+unmute_text="#"'!'"/bin/bash\nosascript -e 'set volume without output muted'"
 
 function patch() {
-    echo -e $mute_on_text > $mute_path
-    chmod u+x $mute_path
-    echo " + Generated mute script to" $mute_path
+    echo -e "$mute_text" > "$mute_path"
+    chmod u+x "$mute_path"
+    echo " + Generated mute script to $mute_path"
 
-    echo -e $mute_off_text > $unmute_path
-    chmod u+x $unmute_path
-    echo " + Generated unmute script to" $unmute_path
+    echo -e "$unmute_text" > "$unmute_path"
+    chmod u+x "$unmute_path"
+    echo " + Generated unmute script to $unmute_path"
 
     defaults write com.apple.loginwindow LogoutHook $mute_path
     echo " + Binding mute script to logout"
@@ -37,10 +37,10 @@ function patch() {
 }
 
 function unpatch() {
-    rm -f $mute_path
-    echo " + Removing" $mute_path
-    rm -f $unmute_path
-    echo " + Removing" $unmute_path
+    rm -f "$mute_path"
+    echo " + Removing $mute_path"
+    rm -f "$unmute_path"
+    echo " + Removing $unmute_path"
     defaults delete com.apple.loginwindow LogoutHook
     echo " + Unbinding mute script"
     defaults delete com.apple.loginwindow LoginHook
@@ -95,7 +95,7 @@ if [ -f "$mute_path" ] && [ -f "$unmute_path" ]; then
     echo " Your system appears to have already been patched. "
     echo -n " Would you like to undo the patch? (y/N) "
     read revert
-    revert=`echo $revert | tr '[:lower:]' '[:upper:]' | cut -b 1`
+    revert=`echo "$revert" | tr '[:lower:]' '[:upper:]' | cut -b 1`
     if [[ "$revert" != "Y" ]]; then
         echo " Good bye. "
         echo
@@ -115,7 +115,7 @@ fi
 echo
 echo -n "Everything is ready. Would you like to apply the patch? (y/N) "
 read go_ahead
-go_ahead=`echo $go_ahead | tr '[:lower:]' '[:upper:]' | cut -b 1`
+go_ahead=`echo "$go_ahead" | tr '[:lower:]' '[:upper:]' | cut -b 1`
 if [[ "$go_ahead" != "Y" ]]; then
     echo "You must answer yes, aborting."
     echo
