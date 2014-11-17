@@ -38,14 +38,14 @@ function patch() {
 
 function unpatch() {
     rm -f "$mute_path"
-    echo " + Removing $mute_path"
+    echo " + Removed $mute_path"
     rm -f "$unmute_path"
-    echo " + Removing $unmute_path"
+    echo " + Removed $unmute_path"
     defaults delete com.apple.loginwindow LogoutHook
-    echo " + Unbinding mute script"
+    echo " + Unbound mute script"
     defaults delete com.apple.loginwindow LoginHook
-    echo " + Unbinding unmute script"
-    echo " + Finished patching."
+    echo " + Unbound unmute script"
+    echo " + Finished unpatching."
     echo
     echo " Successfully re-enabled boot sound!"
     echo " Please reboot your system to verify."
