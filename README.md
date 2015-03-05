@@ -14,7 +14,7 @@ patch to restore the original functionality.
 
 Instructions
 ------------
-1. Download (Right Click > Save As) the 
+1. Download the 
    [Patch.command](http://little-vince.github.io/mute-boot/Patch.command) file 
    and save it onto your Desktop.
 2. Open up Terminal and execute:
