@@ -12,6 +12,17 @@ logout and login hooks respectively.
 Lastly, this program can also re-enable the boot sound. Simple re-run this
 patch to restore the original functionality.
 
+Instructions
+------------
+1. Download the Patch.command file and save it onto your Desktop.
+2. Open up Terminal and execute:
+```bash
+cd ~/Desktop && chmod +x Patch.command
+```
+3. Finally execute:
+```bash
+./Patch.command
+```
 
 General Information
 -------------------
